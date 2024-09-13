@@ -4,19 +4,16 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
 
-# datapaths
 adult_train = 'adult/adult.data'
 adult_test = 'adult/adult.test'
 churn ='churn/WA_Fn-UseC_-Telco-Customer-Churn.csv'
 credit_card = 'creditcard/creditcard.csv'
 
-# preprocess function, returns X_train, X_test, y_train, y_test for each choice
 def preprocess(choice):
     if choice == 'adult':
         df_train = pd.read_csv(adult_train, header=None)
         df_test = pd.read_csv(adult_test, header=None, skiprows=1) # skip the first row
 
-        # ? to NaN
         df_train = df_train.replace(' ?', np.nan)
         df_test = df_test.replace(' ?', np.nan)
 
@@ -24,47 +21,58 @@ def preprocess(choice):
         # df = df.dropna()
         # df_test = df_test.dropna()
 
-        #fill NaN with mode for categorical and mean for numerical
-        for df in [df_train, df_test]:
-            for col in df.columns:
-                if df[col].dtype == 'object':
-                    df[col] = df[col].fillna(df[col].mode()[0])
-                else:
-                    df[col] = df[col].fillna(df[col].mean())
-            
-        # target column is like '>50K' and '<=50K', convert to 1 and 0
+        for col in df_train.columns:
+            if df_train[col].dtype == 'object':
+                df_train[col] = df_train[col].fillna(df_train[col].mode()[0])
+            else:
+                df_train[col] = df_train[col].fillna(df_train[col].mean())
+
+        for col in df_test.columns:
+            if df_test[col].dtype == 'object':
+                df_test[col] = df_test[col].fillna(df_test[col].mode()[0])
+            else:
+                df_test[col] = df_test[col].fillna(df_test[col].mean())
+
         df_train[14] = df_train[14].apply(lambda x: 1 if x == ' >50K' else 0)
         df_test[14] = df_test[14].apply(lambda x: 1 if x == ' >50K.' else 0)
-
-        # split X and y
+        
         X_train = df_train.iloc[:, :-1]
         y_train = df_train.iloc[:, -1]
         X_test = df_test.iloc[:, :-1]
         y_test = df_test.iloc[:, -1]
 
-        # label encoding for categorical columns with binary values
-        for df in [X_train, X_test]:
-            for col in df.columns:
-                if df[col].dtype == 'object' and len(df[col].unique()) > 2:
-                    # one hot encoding
-                    df = pd.get_dummies(df, columns=[col], drop_first=True)
-                else:
-                    # label encoding
-                    le = LabelEncoder()
-                    df[col] = le.fit_transform(df[col])
             
+        for col in X_train.columns:
+            if X_train[col].dtype == 'object' and len(X_train[col].unique()) == 2:
+                le = LabelEncoder()
+                X_train[col] = le.fit_transform(X_train[col])
+            
+            elif X_train[col].dtype == 'object':
+                X_train = pd.get_dummies(X_train, columns=[col], drop_first=True)
 
-        for df in [X_train, X_test]:
-            for col in df.columns:
-                if len(df[col].unique()) > 2 and df[col].dtype != 'object':
-                    scaler = StandardScaler()  
-                    df[col] = scaler.fit_transform(df[col].values.reshape(-1, 1))  
+        for col in X_test.columns:
+            if X_test[col].dtype == 'object' and len(X_test[col].unique()) == 2:
+                le = LabelEncoder()
+                X_test[col] = le.fit_transform(X_test[col])
+            
+            elif X_test[col].dtype == 'object':
+                X_test = pd.get_dummies(X_test, columns=[col], drop_first=True)
+
+        #add missing columns to test set
+        missing_cols = set(X_train.columns) - set(X_test.columns)
+        for col in missing_cols:
+            X_test[col] = 0
+        X_test = X_test[X_train.columns]
+
+        for col in X_train.columns.values:
+            scalar = StandardScaler()
+            X_train[col] = scalar.fit_transform(X_train[col].values.reshape(-1, 1))
+            X_test[col] = scalar.transform(X_test[col].values.reshape(-1, 1))
 
         return X_train, X_test, y_train, y_test
 
     elif choice == 'credit_card':
         df = pd.read_csv(credit_card)
-        #drop time column
         df = df.drop('Time', axis=1)
         #randomly selected 20000 negative samples + all positive samples
         df = pd.concat([df[df['Class'] == 0].sample(20000, random_state=42), df[df['Class'] == 1]])
@@ -75,13 +83,11 @@ def preprocess(choice):
         X = df.iloc[:, :-1]
         y = df.iloc[:, -1]
 
-        # label encoding for categorical columns with binary values
         for col in X.columns:
-            if len(X[col].unique()) > 2:
-                # one hot encoding
+            if len(X[col].unique()) > 2 and X[col].dtype == 'object':
+
                 X = pd.get_dummies(X, columns=[col], drop_first=True)
-            else:
-                # label encoding
+            elif  X[col].dtype == 'object':
                 le = LabelEncoder()
                 X[col] = le.fit_transform(X[col])
 
@@ -93,9 +99,45 @@ def preprocess(choice):
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
         return X_train, X_test, y_train, y_test
+    
+    elif choice == 'churn':
+        df = pd.read_csv(churn)
+        df = df.drop('customerID', axis=1)
 
+        df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce')
 
-# logistic regression class
+        for col in df.columns:
+            if df[col].dtype == 'object':
+                df[col] = df[col].fillna(df[col].mode()[0])  # Fill NaN for categorical columns
+            else:
+                df[col] = df[col].fillna(df[col].mean())  # Fill NaN for numeric columns
+
+        df['Churn'] = df['Churn'].apply(lambda x: 1 if x == 'Yes' else 0)
+
+        X = df.iloc[:, :-1]
+        y = df.iloc[:, -1]
+
+        for col in X.columns:
+            if len(X[col].unique()) > 2 and X[col].dtype == 'object':
+                X = pd.get_dummies(X, columns=[col], drop_first=True)
+            elif X[col].dtype == 'object':
+                le = LabelEncoder()
+                X[col] = le.fit_transform(X[col])
+
+        for col in X.columns:
+            if len(X[col].unique()) > 2:
+                scaler = StandardScaler()  
+                X[col] = scaler.fit_transform(X[col].values.reshape(-1, 1))
+
+        # change boolean columns to binary
+        for col in X.columns:
+            if X[col].dtype == 'bool':
+                X[col] = X[col].apply(lambda x: 1 if x == True else 0)
+
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+        return X_train, X_test, y_train, y_test
+
 class LogisticRegression:
     def __init__(self,learning_rate=0.01, max_epoch=1000):
         self.learning_rate = learning_rate
@@ -104,6 +146,7 @@ class LogisticRegression:
         self.bias = None
 
     def sigmoid(self, z):
+        z = np.array(z)
         return 1 / (1 + np.exp(-z))
     
     def fit(self, X, y):
@@ -132,7 +175,7 @@ class LogisticRegression:
         z = np.dot(X, self.weights) + self.bias
         y_pred = self.sigmoid(z)
         y_pred = np.where(y_pred > 0.5, 1, 0)
-        return y
+        return y_pred
 
     def loss(self, y, y_pred):
         y_pred= np.where(y_pred == 0, 1e-15, y_pred)
@@ -157,7 +200,6 @@ class LogisticRegression:
 
 # main function
 def main(choice):
-    choice = 'adult'
     X_train, X_test, y_train, y_test = preprocess(choice)
     model = LogisticRegression()
     model.fit(X_train, y_train)
@@ -169,4 +211,4 @@ def main(choice):
     print(f'F1-score: {f1_score}')
 
 if __name__ == '__main__':
-    main('adult')
+    main('churn')
