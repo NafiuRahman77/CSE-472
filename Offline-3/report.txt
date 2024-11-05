@@ -1,96 +1,96 @@
 Model 0 - Learning Rate 0.005
-Training Loss: 0.5172946310756484
-Validation Loss: 0.3972249268314973
-Training Accuracy: 0.8705625
-Validation Accuracy: 0.8563333333333333
-Training F1: 0.8695186830496485
-Validation F1: 0.8556345679069043
+Training Loss: 0.5049563420380575
+Validation Loss: 0.3949034515602744
+Training Accuracy: 0.87475
+Validation Accuracy: 0.8591666666666666
+Training F1: 0.8741595440863721
+Validation F1: 0.8587350150199236
 
 Model 0 - Learning Rate 0.001
-Training Loss: 0.46598816789057845
-Validation Loss: 0.38215838097678706
-Training Accuracy: 0.8786458333333333
-Validation Accuracy: 0.8644166666666667
-Training F1: 0.8779626968024322
-Validation F1: 0.8641364225034438
+Training Loss: 0.45933045226061003
+Validation Loss: 0.38183368993328454
+Training Accuracy: 0.8824166666666666
+Validation Accuracy: 0.8631666666666666
+Training F1: 0.8817266729137184
+Validation F1: 0.8625744294062091
 
 Model 0 - Learning Rate 0.0005
-Training Loss: 0.4501267810457315
-Validation Loss: 0.37779279692542167
-Training Accuracy: 0.8805416666666667
+Training Loss: 0.4493185921243454
+Validation Loss: 0.38020955305994864
+Training Accuracy: 0.884875
 Validation Accuracy: 0.8649166666666667
-Training F1: 0.8797734157083156
-Validation F1: 0.8645326669511579
+Training F1: 0.8837381395049929
+Validation F1: 0.8638386071767024
 
 Model 0 - Learning Rate 0.0001
-Training Loss: 0.4495167491626875
-Validation Loss: 0.37707680497165014
-Training Accuracy: 0.8810208333333334
-Validation Accuracy: 0.8661666666666666
-Training F1: 0.8798054474429072
-Validation F1: 0.865193059998201
+Training Loss: 0.44322249953513276
+Validation Loss: 0.37994017630147603
+Training Accuracy: 0.8855416666666667
+Validation Accuracy: 0.86425
+Training F1: 0.8845294126216187
+Validation F1: 0.8632444800427945
 
 Model 1 - Learning Rate 0.005
-Training Loss: 0.41790851749203867
-Validation Loss: 0.3579826790874604
-Training Accuracy: 0.8866458333333334
-Validation Accuracy: 0.8710833333333333
-Training F1: 0.8865513251745147
-Validation F1: 0.8713551346458143
+Training Loss: 0.38203099354359354
+Validation Loss: 0.35585615868612314
+Training Accuracy: 0.8950208333333334
+Validation Accuracy: 0.8753333333333333
+Training F1: 0.894720756000494
+Validation F1: 0.8752372482759136
 
 Model 1 - Learning Rate 0.001
-Training Loss: 0.34857976289996045
-Validation Loss: 0.33851821580597713
-Training Accuracy: 0.8983333333333333
-Validation Accuracy: 0.876
-Training F1: 0.8984844085205863
-Validation F1: 0.8763592983748281
+Training Loss: 0.32064613413825577
+Validation Loss: 0.33452058844248467
+Training Accuracy: 0.9081666666666667
+Validation Accuracy: 0.8801666666666667
+Training F1: 0.9083548334537526
+Validation F1: 0.8805953235743129
 
 Model 1 - Learning Rate 0.0005
-Training Loss: 0.33671400227660875
-Validation Loss: 0.33329428186462995
-Training Accuracy: 0.9029791666666667
-Validation Accuracy: 0.8790833333333333
-Training F1: 0.9030837344912118
-Validation F1: 0.879337171227774
+Training Loss: 0.3063337479887955
+Validation Loss: 0.33496843423845357
+Training Accuracy: 0.911625
+Validation Accuracy: 0.8806666666666667
+Training F1: 0.9119691793241657
+Validation F1: 0.8812745602025622
 
 Model 1 - Learning Rate 0.0001
-Training Loss: 0.32807350691954723
-Validation Loss: 0.3312162878010127
-Training Accuracy: 0.9039583333333333
-Validation Accuracy: 0.87925
-Training F1: 0.9040925768983102
-Validation F1: 0.8795757400304784
+Training Loss: 0.3018872738899261
+Validation Loss: 0.33353316206493855
+Training Accuracy: 0.9132708333333334
+Validation Accuracy: 0.8820833333333333
+Training F1: 0.9133107552739611
+Validation F1: 0.8823442208926725
 
 Model 2 - Learning Rate 0.005
-Training Loss: 0.4402415463935775
-Validation Loss: 0.36736914006232596
-Training Accuracy: 0.8828125
-Validation Accuracy: 0.8655
-Training F1: 0.882717423492166
-Validation F1: 0.8657887709610901
+Training Loss: 0.4073899869294936
+Validation Loss: 0.34679073713138153
+Training Accuracy: 0.8938333333333334
+Validation Accuracy: 0.8750833333333333
+Training F1: 0.8933168022139751
+Validation F1: 0.8749617571312396
 
 Model 2 - Learning Rate 0.001
-Training Loss: 0.38137324386594956
-Validation Loss: 0.3451219583849799
-Training Accuracy: 0.8944166666666666
-Validation Accuracy: 0.874
-Training F1: 0.8943479349768697
-Validation F1: 0.8742656954278625
+Training Loss: 0.345211782547082
+Validation Loss: 0.33528570787996576
+Training Accuracy: 0.9042291666666666
+Validation Accuracy: 0.8805833333333334
+Training F1: 0.9042112191330618
+Validation F1: 0.8808071485815203
 
 Model 2 - Learning Rate 0.0005
-Training Loss: 0.36954946910599523
-Validation Loss: 0.3436039681771067
-Training Accuracy: 0.8974166666666666
-Validation Accuracy: 0.8766666666666667
-Training F1: 0.8971153206805738
-Validation F1: 0.8766405013278298
+Training Loss: 0.3361288505026772
+Validation Loss: 0.3343696705801261
+Training Accuracy: 0.9070208333333334
+Validation Accuracy: 0.8811666666666667
+Training F1: 0.907060840582929
+Validation F1: 0.8813827542843375
 
 Model 2 - Learning Rate 0.0001
-Training Loss: 0.3629343739989554
-Validation Loss: 0.3405646053294476
-Training Accuracy: 0.8985
-Validation Accuracy: 0.8766666666666667
-Training F1: 0.8981189787985601
-Validation F1: 0.876503721235026
+Training Loss: 0.32992476708297225
+Validation Loss: 0.33220812127880134
+Training Accuracy: 0.908375
+Validation Accuracy: 0.8819166666666667
+Training F1: 0.9081963063977065
+Validation F1: 0.8819020379989647
 
