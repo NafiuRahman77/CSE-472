@@ -55,7 +55,7 @@ This assignment focuses on implementing Logistic Regression (LR) from sratch, en
 
 ## Offline 3: Neural Network and Backpropagation
 
-### **File**: `1905066.ipynb`
+### **File**: `1905077.ipynb`
 
 ### **Introduction**
 This assignment involves implementing a Feed-Forward Neural Network (FNN) from scratch for apparel classification.
