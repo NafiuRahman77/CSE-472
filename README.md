@@ -6,10 +6,10 @@ This repository contains the assignments and solutions for the **CSE 472: Machin
 
 ## Contents
 
-1. [Offline 1: Data Preprocessing and Feature Engineering](#Offline-1)
-2. [Offline 2: Ensemble Learning with Logistic Regression](#Offline-2)
-3. [Offline 3: Neural Network and Backpropagation](#Offline-3)
-4. [Offline 4: PCA and Expectation-Maximization](#Offline-4)
+1. [Offline 1: Data Preprocessing and Feature Engineering](Offline-1)
+2. [Offline 2: Ensemble Learning with Logistic Regression](Offline-2)
+3. [Offline 3: Neural Network and Backpropagation](Offline-3)
+4. [Offline 4: PCA and Expectation-Maximization](Offline-4)
 
 ---
 
